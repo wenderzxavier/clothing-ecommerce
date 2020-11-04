@@ -1,10 +1,19 @@
 import React from 'react';
-import { string } from 'prop-types';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 
 import './menu-item.styles.scss';
 
-const MenuItem = ({ title, imageUrl, size }: { title: String, imageUrl: String, size: String }) => (
-  <section className={`${size} menu-item`}>
+interface IStateProps {
+  title: string,
+  imageUrl: string,
+  size: string,
+  linkUrl: string
+};
+
+type Props = IStateProps & RouteComponentProps<any>;
+
+const MenuItem = ({ title, imageUrl, size, linkUrl, match, history }: Props) : JSX.Element => (
+  <section className={`${size} menu-item`} onClick={() => history.push(`${match.url}${linkUrl}`)}>
     <div
       className='background-image'
       style={{
@@ -18,15 +27,4 @@ const MenuItem = ({ title, imageUrl, size }: { title: String, imageUrl: String, 
   </section>
 );
 
-MenuItem.propTypes = {
-  title: string.isRequired,
-  imageUrl: string,
-  size: string
-}
-
-MenuItem.defaultProps = {
-  imageUrl: '',
-  size: ''
-}
-
-export default MenuItem;
+export default withRouter(MenuItem);
