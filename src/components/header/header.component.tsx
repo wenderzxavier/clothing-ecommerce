@@ -4,14 +4,17 @@ import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import { auth } from '../../firebase/firebase.utils';
 import { RootState } from '../../redux/root-reducer';
+import CartIcon from '../cart-icon/cart-icon.component';
+import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 
 import './header.styles.scss';
 
 interface IProps {
-  currentUser?: string
+  currentUser?: string,
+  hidden: boolean
 }
 
-const Header = ({ currentUser }: IProps) => (
+const Header = ({ currentUser, hidden }: IProps) => (
   <div className="header">
     <Link className="logo-container" to="/">
       <Logo className="logo" />
@@ -29,12 +32,15 @@ const Header = ({ currentUser }: IProps) => (
           :
           <Link className='option' to="/signin">SIGN IN</Link>
       }
+      <CartIcon />
     </div>
+    {!hidden && <CartDropdown />}
   </div>
 );
 
 const mapStateToProps = (state: RootState) => ({
-  currentUser: state.user.currentUser
+  currentUser: state.user.currentUser,
+  hidden: state.cart.hidden
 })
 
 export default connect(mapStateToProps)(Header);
