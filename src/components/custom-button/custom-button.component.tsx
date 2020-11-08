@@ -6,11 +6,12 @@ interface IProps {
   children: string,
   type?: any,
   onClick?: any,
-  isGoogleSignIn?: boolean
+  isGoogleSignIn?: boolean,
+  inverted?: boolean
 }
 
-const CustomButton: React.FC<IProps> = ({ children, isGoogleSignIn, ...otherProps }) => (
-  <button className={`${isGoogleSignIn && 'google-sign-in'} custom-button`} {...otherProps}>
+const CustomButton: React.FC<IProps> = ({ children, isGoogleSignIn, inverted, ...otherProps }) => (
+  <button className={`${inverted ? 'inverted' : ''} ${isGoogleSignIn && 'google-sign-in'} custom-button`} {...otherProps}>
     {children}
   </button>
 );

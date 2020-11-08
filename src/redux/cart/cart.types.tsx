@@ -1,11 +1,24 @@
+import { Item } from "../../components/collection-item/collection-item.component";
+
 export const TOGGLE_CART_HIDDEN = 'TOGGLE_CART_HIDDEN';
+export const ADD_ITEM = 'ADD_ITEM';
 
 interface ToggleCartHidden {
   type: typeof TOGGLE_CART_HIDDEN,
 }
 
-export type CartActionsTypes = ToggleCartHidden;
+interface AddItem {
+  type: typeof ADD_ITEM,
+  payload: Item
+}
+
+interface CartItems extends Item {
+  quantity: number
+}
+
+export type CartActionsTypes = ToggleCartHidden | AddItem;
 
 export interface CartState {
-  hidden: boolean
+  hidden: boolean,
+  cartItems: CartItems[]
 }
