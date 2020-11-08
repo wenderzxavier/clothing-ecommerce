@@ -1,10 +1,7 @@
 import { Item } from "../../components/collection-item/collection-item.component";
+import { CartStoreItem } from "./cart.types";
 
-interface CartItems extends Item {
-  quantity: number
-}
-
-export const addItemToCart = (cartItems: CartItems[], cartItemToAdd: Item) => {
+export const addItemToCart = (cartItems: CartStoreItem[], cartItemToAdd: Item) => {
   const existingCartItem = cartItems.find(cartItem => cartItem.id === cartItemToAdd.id);
 
   if (existingCartItem) {

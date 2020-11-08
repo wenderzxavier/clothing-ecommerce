@@ -12,7 +12,7 @@ interface AddItem {
   payload: Item
 }
 
-interface CartItems extends Item {
+export interface CartStoreItem extends Item {
   quantity: number
 }
 
@@ -20,5 +20,5 @@ export type CartActionsTypes = ToggleCartHidden | AddItem;
 
 export interface CartState {
   hidden: boolean,
-  cartItems: CartItems[]
+  cartItems: CartStoreItem[]
 }
