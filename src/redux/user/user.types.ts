@@ -8,5 +8,5 @@ interface SetCurrentUser {
 export type UserActionsTypes = SetCurrentUser;
 
 export interface UserState {
-  currentUser?: string
+  currentUser: string | undefined
 }

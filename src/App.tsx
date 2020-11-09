@@ -11,6 +11,8 @@ import { connect } from 'react-redux';
 import { setCurrentUser } from './redux/user/user.actions';
 import { UserActionsTypes } from './redux/user/user.types';
 import { RootState } from './redux/root-reducer';
+import { selectCurrentUser } from './redux/user/user.selectors';
+import CheckoutPage from './pages/checkout/checkout.component';
 
 class App extends React.Component<{ currentUser: any }, { currentUser: any }> {
   state = {
@@ -37,6 +39,7 @@ class App extends React.Component<{ currentUser: any }, { currentUser: any }> {
         <Switch>
           <Route exact path='/' component={HomePage} />
           <Route path='/shop' component={Shop} />
+          <Route exact path='/checkout' component={CheckoutPage} />
           <Route exact path='/signIn' render={() => this.props.currentUser ? (<Redirect to='/' />) : (<SignInSignOut />)} />
         </Switch>
       </div>
@@ -44,8 +47,8 @@ class App extends React.Component<{ currentUser: any }, { currentUser: any }> {
   }
 }
 
-const mapStateToProps = ({ user }: RootState) => ({
-  currentUser: user.currentUser
+const mapStateToProps = (state: RootState) => ({
+  currentUser: selectCurrentUser(state)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<UserActionsTypes>) => ({
