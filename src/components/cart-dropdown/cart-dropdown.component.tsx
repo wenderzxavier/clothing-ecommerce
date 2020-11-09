@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { selectCartItems } from '../../redux/cart/cart.selectors';
 import { CartStoreItem } from '../../redux/cart/cart.types';
 import { RootState } from '../../redux/root-reducer';
 import CartItem from '../cart-item/cart-item.component';
@@ -28,8 +29,8 @@ const CartDropdown = ({ cartItems }: IProps): JSX.Element => (
   </div>
 );
 
-const mapStateToProps = ({ cart: { cartItems } }: RootState) => ({
-  cartItems
+const mapStateToProps = (state: RootState) => ({
+  cartItems: selectCartItems(state)
 });
 
 
