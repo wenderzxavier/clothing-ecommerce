@@ -1,43 +1,27 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import CollectionPreview from '../../components/collection-preview/collection-preview.component';
-import { SHOP_DATA } from './shop.data';
+import { RootState } from '../../redux/root-reducer';
+import { selectCollections } from '../../redux/shop/shop.selectors';
+import { Collection } from '../../redux/shop/shop.types';
 
-interface Item {
-  id: number,
-  name: string,
-  imageUrl: string,
-  price: number
-}
-
-interface Collection {
-  id: number,
-  title: string,
-  routeName: string,
-  items: Item[]
-}
-
-interface DirectoryProps { };
-interface DirectoryState {
+interface IProps {
   collections: Collection[]
 };
 
-class Shop extends React.Component<DirectoryProps, DirectoryState> {
-  state = {
-    collections: SHOP_DATA
-  }
+const Shop = ({ collections }: IProps): JSX.Element => (
+  <div className="shop-page">
+    {
+      collections.map(({ id, ...collectionProps }) => (
+        <CollectionPreview key={id} {...collectionProps} />
+      ))
+    }
+  </div>
+)
 
-  render() {
-    const { collections } = this.state;
-    return (
-      <div className="shop-page">
-        {
-          collections.map(({ id, ...collectionProps }) => (
-            <CollectionPreview key={id} {...collectionProps} />
-          ))
-        }
-      </div>
-    );
-  }
-}
+const mapStateToProps = (state: RootState) => ({
+  collections: selectCollections(state)
+})
 
-export default Shop;
+
+export default connect(mapStateToProps)(Shop);

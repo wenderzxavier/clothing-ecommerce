@@ -6,7 +6,7 @@ import './menu-item.styles.scss';
 interface IStateProps {
   title: string,
   imageUrl: string,
-  size: string,
+  size?: string,
   linkUrl: string
 };
 
