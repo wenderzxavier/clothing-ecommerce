@@ -12,6 +12,10 @@ export interface Collection {
   items: Item[]
 }
 
+export interface ShopCollections {
+  [key: string]: Collection,
+}
+
 export interface ShopState {
-  collections: Collection[]
+  collections: ShopCollections
 }
